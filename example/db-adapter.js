@@ -32,7 +32,7 @@ Adapter.prototype.createNode = function(nodeData, metadata) {
     };
   });
 
-  nodeData._id = 'node'+nodeData.name;
+  nodeData._id = 'node'+nodeData.name+Date.now();
   nodeData.tyoe = 'node';
   nodeData.metadata = metadata.map(function(pair) {
     return {
@@ -47,7 +47,7 @@ Adapter.prototype.createNode = function(nodeData, metadata) {
 
   return this._db.bulkDocs(values.concat(fields, nodeData), opts)
     .then(function(resp) {
-      console.log(resp);
+      console.log(arguments);
     })
     .catch(function(err) {
       console.log(err);
