@@ -12,7 +12,6 @@ var App = React.createClass({
     event.preventDefault();
     var data = this.refs.form.getData();
     adapter.createNode({name: 'bla', url:'some url'}, data);
-    // console.log(this.refs.form.getData());
   },
 
   render: function() {
