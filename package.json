@@ -19,11 +19,11 @@
   "scripts": {
     "start": "npm run server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify -d app/example.react.js > app/bundle.js",
-    "watch": "watchify app/example.react.js -o app/bundle.js -dv",
+    "build": "browserify -d app/example.react.js > public/bundle.js",
+    "watch": "watchify app/example.react.js -o public/bundle.js -dv",
     "server": "node server.js",
     "dev": "npm run watch & npm run server",
-    "demo": "browserify app/example.react.js > app/bundle.js && html-inline app/index.html | curl -sT- https://htmlb.in | pbcopy && echo \"Don't forget to paste the demo URL into the readme.\""
+    "demo": "browserify app/example.react.js > public/bundle.js && html-inline public/index.html | curl -sT- https://htmlb.in | pbcopy && echo \"Don't forget to paste the demo URL into the readme.\""
   },
   "author": "Nick Thomas <nichoth@gmail.com>",
   "repository": {
