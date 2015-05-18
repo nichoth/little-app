@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "0.12.x"
+  },
   "browserify": {
     "transform": [
       [
@@ -14,12 +17,13 @@
     ]
   },
   "scripts": {
+    "start": "npm run server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify -d example/example.react.js > example/bundle.js",
-    "watch": "watchify example/example.react.js -o example/bundle.js -dv",
+    "build": "browserify -d app/example.react.js > app/bundle.js",
+    "watch": "watchify app/example.react.js -o app/bundle.js -dv",
     "server": "node server.js",
     "dev": "npm run watch & npm run server",
-    "demo": "browserify example/example.react.js > example/bundle.js && html-inline example/index.html | curl -sT- https://htmlb.in | pbcopy && echo \"Don't forget to paste the demo URL into the readme.\""
+    "demo": "browserify app/example.react.js > app/bundle.js && html-inline app/index.html | curl -sT- https://htmlb.in | pbcopy && echo \"Don't forget to paste the demo URL into the readme.\""
   },
   "author": "Nick Thomas <nichoth@gmail.com>",
   "repository": {
@@ -33,6 +37,7 @@
     "reactify": "^1.1.0"
   },
   "dependencies": {
+    "pg": "^4.3.0",
     "pouchdb": "^3.5.0",
     "react-auto-form": "https://github.com/nichoth/react-auto-form/tarball/master"
   }
