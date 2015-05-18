@@ -3,6 +3,10 @@ var KvForm = require('react-auto-form');  // key-value form
 
 module.exports = React.createClass({
 
+  propTypes: {
+    submitHandler: React.PropTypes.func.isRequired
+  },
+
   submitHandler: function(event) {
     event.preventDefault();
     var vals = event.target.elements;
@@ -13,6 +17,7 @@ module.exports = React.createClass({
     var kvData = this.refs.kvForm.getData();
     doc.metadata = kvData;
     console.log(doc);
+    this.props.submitHandler(doc);
   },
 
   render: function() {
