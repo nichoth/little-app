@@ -2,11 +2,13 @@ var React = require('react');
 var CreateNodeView = require('./CreateNodeView.react.js');
 window.React = React;
 var listView = require('./list-view');
+var devStuff = require('./dev-stuff-view');
+var uuid = require('node-uuid');
 
 var db;
 require('./db')().then(function(pouch) {
   db = pouch;
-  init();
+  init(pouch);
 });
 
 function expandNode(node) {
@@ -42,7 +44,7 @@ function bulkSave(docs) {
 }
 
 function createId(type) {
-  return type+Date.now();
+  return type+uuid.v1();  // time based uuid
 }
 
 function serializeField(hash) {
@@ -69,7 +71,7 @@ function handle(doc) {
 
   bulkSave(fieldDocs.concat(valDocs)).then(function(resp) {
     var node = expanded.node;
-    node._id = 'node'+Date.now();
+    node._id = createId('node');
     node.type = 'node';
     console.log(node);
     node.metadata = node.metadata.map(function(pair) {
@@ -90,7 +92,8 @@ function handle(doc) {
   });
 }
 
-function init() {
+function init(db) {
+  devStuff(db, init);
   listView(db);
   React.render(<CreateNodeView submitHandler={handle} />,
     document.getElementById('form-stuff'));

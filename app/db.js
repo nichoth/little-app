@@ -1,5 +1,5 @@
 var Pouch = require('pouchdb');
-var pouch = new Pouch('little-app-test');
+var pouch = new Pouch('little-app-test2');
 
 // put design docs in pouch
 module.exports = function db() {
@@ -31,7 +31,7 @@ module.exports = function db() {
 
   return pouch.bulkDocs(views).then(function() {
     return pouch;
-  }).catch(function() {
-    console.log(arguments);
+  }).catch(function(err) {
+    console.log(err);
   });
 };
