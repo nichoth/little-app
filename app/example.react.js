@@ -1,9 +1,13 @@
 var React = require('react');
 var CreateNodeView = require('./CreateNodeView.react.js');
 window.React = React;
+var listView = require('./list-view');
 
-var Pouch = require('pouchdb');
-var db = new Pouch('little-app-test');
+var db;
+require('./db')().then(function(pouch) {
+  db = pouch;
+  init();
+});
 
 function expandNode(node) {
 
@@ -67,10 +71,15 @@ function handle(doc) {
     var node = expanded.node;
     node._id = 'node'+Date.now();
     node.type = 'node';
+    console.log(node);
     node.metadata = node.metadata.map(function(pair) {
       return {
-        field: fieldDocs._id,
-        value: valDocs._id
+        field: fieldDocs.filter(function(field) {
+          return field.name === pair.field;
+        })[0]._id,
+        value: valDocs.filter(function(val) {
+          return val.name === pair.value;
+        })[0]._id
       };
     });
 
@@ -81,4 +90,8 @@ function handle(doc) {
   });
 }
 
-React.render(<CreateNodeView submitHandler={handle} />, document.body);
+function init() {
+  listView(db);
+  React.render(<CreateNodeView submitHandler={handle} />,
+    document.getElementById('form-stuff'));
+}

@@ -1,8 +1,8 @@
 {
-  "name": "little-pouch-app",
+  "name": "little-app",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": "0.12.x"
   },
@@ -19,8 +19,8 @@
   "scripts": {
     "start": "npm run server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify -d app/example.react.js > public/bundle.js",
-    "watch": "watchify app/example.react.js -o public/bundle.js -dv",
+    "build": "browserify -d app/example.react.js [ envify --NODE_ENV production ] > public/bundle.js",
+    "watch": "watchify -dv [ envify --NODE_ENV development ] app/example.react.js -o public/bundle.js",
     "server": "node server.js",
     "dev": "npm run watch & npm run server",
     "demo": "browserify app/example.react.js > public/bundle.js && html-inline public/index.html | curl -sT- https://htmlb.in | pbcopy && echo \"Don't forget to paste the demo URL into the readme.\""
@@ -28,12 +28,13 @@
   "author": "Nick Thomas <nichoth@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nichoth/little-pouch-app.git"
+    "url": "https://github.com/nichoth/little-app.git"
   },
   "license": "ISC",
   "peerDependencies": {},
   "devDependencies": {
     "ecstatic": "^0.7.5",
+    "envify": "^3.4.0",
     "reactify": "^1.1.0"
   },
   "dependencies": {
